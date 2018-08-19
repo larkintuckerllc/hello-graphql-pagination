@@ -1,9 +1,5 @@
 {
     "compilerOptions": {
-        "lib": [
-            "es2015",
-            "esnext.asynciterable"
-        ],
         "module": "commonjs",
         "esModuleInterop": true,
         "target": "es6",
@@ -17,7 +13,11 @@
                 "node_modules/*",
                 "src/types/*"
             ]
-        }
+        },
+        "lib": [
+            "es2015",
+            "esnext.asynciterable"
+        ]
     },
     "include": [
         "src/**/*"
