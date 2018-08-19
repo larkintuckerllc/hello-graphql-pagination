@@ -1,6 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-express';
 import cors from 'cors';
 import express from 'express';
+import { allTodos } from './todos';
 
 const app = express();
 app.use(cors());
@@ -9,14 +10,20 @@ app.use((_, res, next) => {
   return next();
 });
 const typeDefs = gql`
+  type Todo {
+    id: ID!
+    title: String!
+    completed: Boolean!
+  }
   type Query {
-    "A simple type for getting started!"
-    hello: String
+    allTodos(
+      count: Int
+    ): [Todo]
   }
 `;
 const resolvers = {
   Query: {
-    hello: () => 'world',
+    allTodos,
   },
 };
 const server = new ApolloServer({ typeDefs, resolvers });
