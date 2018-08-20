@@ -15,10 +15,15 @@ const typeDefs = gql`
     title: String!
     completed: Boolean!
   }
+  type TodosResult {
+    todos: [Todo]
+    totalCount: Int
+  }
   type Query {
     allTodos(
-      count: Int
-    ): [Todo]
+      first: Int,
+      offset: Int
+    ): TodosResult
   }
 `;
 const resolvers = {

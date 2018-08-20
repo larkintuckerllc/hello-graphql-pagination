@@ -3,6 +3,10 @@ interface Todo {
   id: string;
   title: string;
 }
+interface TodosResult {
+  totalCount: number;
+  todos: Todo[];
+}
 const data = [
   {
     completed: false,
@@ -130,7 +134,14 @@ const data = [
     title: 'target enhance asymmetric',
   },
 ];
-export const allTodos = (_: any, args: any): Todo[] => {
-  const { count }: { count: number} = args;
-  return data.slice(0, count);
+export const allTodos = (_: any, { first, offset = 0 }: { first: number, offset: number}): TodosResult => {
+  const totalCount = data.length;
+  const todos = first === undefined ?
+    data.slice(offset) :
+    data.slice(offset, offset + first);
+  const result = {
+    todos,
+    totalCount,
+  };
+  return result;
 };
